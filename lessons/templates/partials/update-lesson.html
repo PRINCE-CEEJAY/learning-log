@@ -1,0 +1,9 @@
+    <h1>UPDATE LESSON </h1>
+    <form hx-post="{% url 'update_lesson' %}" hx-target="#lesson-{{lesson.id}}", hx-swap="outerHTML">
+        {% csrf_token %}
+        {{ form }}
+        {% if form.errors %}
+            <p class="text-red-900 rounded-full px-4 py-1"> {{ form.errors }}</p>
+        {% endif %}
+        <button> UPDATE </button>
+    </form>

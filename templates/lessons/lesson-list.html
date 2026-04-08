@@ -7,9 +7,9 @@
     hx-get="{% url 'create_lesson' %}"
     hx-swap="innerHTML"
     hx-target="#modal-body"
-    hx-on:afterOnLoad="openModal()"
+    onclick="openModal()"
     > Add Lesson </button>
-    
+
     {% if lessons %}
     <ul id="lesson-list">
         {% for lesson in lessons %}

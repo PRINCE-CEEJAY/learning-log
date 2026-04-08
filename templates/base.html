@@ -3,18 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEARNING LOGS</title>
-
+    <title>LEARNING - {% block title %} {% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 </head>
 <body class="font-bold flex flex-col items-center min-h-screen">
     <nav class="flex justify-evenly items-center w-full bg-amber-800">
-        <h1 class="text-success">Navbar</h1>
+        <a href="{% url 'home' %}">Home</a>
     </nav>
     <main>
+        <!-- GLOBAL MODAL -->
+        <div id="modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50"
+        hx-on:click="if(event.target.id === 'modal') closeModal() "
+        >
+            
+            <!-- MODAL CONTENT -->
+            <div id="modal-content" class="relative w-[500px] rounded-2xl shadow-xs p-6 transition-all scale-95 opacity-0 duration-300">
+
+                <!-- CLOSE BUTTON -->
+                <button class="absolute right-2 top-2 bg-secondary">Close</button>
+                
+                <!-- DYNAMIC CONTENT -->
+                <div id="modal-body"></div>
+            </div>
+
+        </div>
         {% block content %} {% endblock %}
     </main>
+    <footer class="flex justify-evenly items-center w-full bg-amber-800">All rights reserved, Created by <span class="text-success">Prince Ceejay NG</span>  @ 2026</footer>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script>
+        // MODAL
+        const modal = document.getElementById('modal')
+        const content = document.getElementById('modal-content')
+
+        function openModal(){
+            modal.classList.remove('hidden')
+            modal.classList.add('flex')
+
+            setTimeout(()=>{
+                content.classList.remove('scale-95', 'opacity-0')
+            }, 10)
+        }
+
+        function closeModal(){
+            content.classList.add('scale-95', 'opacity-0')
+            
+            setTimeout(()=>{
+                modal.classList.add('hidden')
+                modal.classList.remove('flex')
+            }, 200)
+        }
+    </script>
 </body>
 </html>

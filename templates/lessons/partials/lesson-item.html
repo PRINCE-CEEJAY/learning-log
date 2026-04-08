@@ -1,0 +1,22 @@
+<li id="lesson-{{ lesson.id }}">
+    <span>{{ lesson.id }}</span>
+    <span class="text-blue-800">{{lesson.topic}}</span>  
+    <button 
+    hx-get="{% url 'lesson_update' lesson.id %}" 
+    hx-swap="outerHTML"
+    hx-target="#lesson-list" 
+    class="btn btn-primary"
+    >Edit</button>     
+    
+        <form
+        class="btn btn-secondary"
+        hx-delete="{% url 'lesson_delete' lesson.id %}" 
+        hx-swap="outerHTML"
+        hx-target="#lesson-list" 
+        >
+        {% csrf_token %}
+        <button>Delete</button>
+        </form>
+    </span>
+<div>
+</li>

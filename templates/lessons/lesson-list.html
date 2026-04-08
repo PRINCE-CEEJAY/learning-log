@@ -4,11 +4,11 @@
 
     <button 
     class="btn btn-primary"
-    hx-on:click="document.getElementById('add').style.display = 'block' "
-    hx-swap="outerHTML"
-    hx-target="#add"
+    hx-get="{% url 'create_lesson' %}"
+    hx-swap="innerHTML"
+    hx-target="#modal-body"
+    hx-on:afterOnLoad="openModal()"
     > Add Lesson </button>
-    {% include 'lessons/partials/add-lesson.html' %}
     
     {% if lessons %}
     <ul id="lesson-list">

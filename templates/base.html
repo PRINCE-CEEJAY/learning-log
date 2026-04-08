@@ -11,24 +11,24 @@
         <a href="{% url 'home' %}">Home</a>
     </nav>
     <main>
-        <!-- GLOBAL MODAL -->
-        <div id="modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50"
-        hx-on:click="if(event.target.id === 'modal') closeModal() "
-        >
-            
-            <!-- MODAL CONTENT -->
-            <div id="modal-content" class="relative w-[500px] rounded-2xl shadow-xs p-6 transition-all scale-95 opacity-0 duration-300">
-
-                <!-- CLOSE BUTTON -->
-                <button class="absolute right-2 top-2 bg-secondary">Close</button>
-                
-                <!-- DYNAMIC CONTENT -->
-                <div id="modal-body"></div>
-            </div>
-
-        </div>
         {% block content %} {% endblock %}
     </main>
+    <!-- GLOBAL MODAL -->
+    <div id="modal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50"
+    hx-on:click="if(event.target.id === 'modal') closeModal() "
+    >
+        
+        <!-- MODAL CONTENT -->
+        <div id="modal-content" class="relative w-[500px] rounded-2xl shadow-xs p-6 transition-all scale-95 opacity-0 duration-300">
+
+            <!-- CLOSE BUTTON -->
+            <button class="absolute right-2 top-2 bg-secondary">Close</button>
+            
+            <!-- DYNAMIC CONTENT -->
+            <div id="modal-body"></div>
+        </div>
+
+    </div>
     <footer class="flex justify-evenly items-center w-full bg-amber-800">All rights reserved, Created by <span class="text-success">Prince Ceejay NG</span>  @ 2026</footer>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
@@ -54,6 +54,12 @@
                 modal.classList.remove('flex')
             }, 200)
         }
+
+        document.addEventListener('keydown', (e)=>{
+            if(e.key === 'Escape'){
+                closeModal()
+            }
+        })
     </script>
 </body>
 </html>

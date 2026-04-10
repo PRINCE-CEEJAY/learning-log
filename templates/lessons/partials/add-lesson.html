@@ -1,8 +1,8 @@
 <form 
 hx-post="{% url 'create_lesson' %}" 
 hx-target="#lesson-list" 
-hx-swap="outerHTML"
-hx-on:htmx:afterRequest="closeModal()"
+hx-swap="beforeend"
+hx-on::after-request="closeModal()"
 >
     {% csrf_token %}
     {{ form }}

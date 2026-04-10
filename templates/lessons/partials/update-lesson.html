@@ -1,11 +1,13 @@
-    <div>
-        <h1>UPDATE LESSON </h1>
-        <form hx-post="{% url 'lesson_update' lesson.id %}" hx-target="#lesson-{{lesson.id}}", hx-swap="outerHTML">
-            {% csrf_token %}
-            {{ form }}
-            {% if form.errors %}
-                <p class="text-red-900 rounded-full px-4 py-1"> {{ form.errors }}</p>
-            {% endif %}
-            <button> UPDATE </button>
-        </form>
-    </div>
+<h1>UPDATE LESSON </h1>
+<form hx-post="{% url 'lesson_update' lesson.id %}" 
+hx-target="#lesson-{{ lesson.id }}"
+hx-swap="outerHTML"
+hx-on::after-request="closeModal()"
+>
+    {% csrf_token %}
+    {{ form }}
+    {% if form.errors %}
+        <p class="text-red-900 rounded-full px-4 py-1"> {{ form.errors }}</p>
+    {% endif %}
+    <button class="btn btn-primary"> UPDATE </button>
+</form>

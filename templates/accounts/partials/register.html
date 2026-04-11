@@ -1,0 +1,10 @@
+<form 
+hx-post="{% url 'register' %}" 
+hx-target="#profile"
+hx-swap="innerHTML"
+hx-on::after-request="closeModal()"
+>
+    {% csrf_token %}
+    {{ form }}
+    <button class="btn btn-primary">Register</button>
+</form>

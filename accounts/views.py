@@ -1,40 +1,40 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.http import HttpResponse
+from django.contrib.auth.models import User
+
+def account_main_view(request):
+    return render(request, 'accounts/account-main.html', {'data': ''})
 
 
-# Create your views here.
-from django.shortcuts import render
-
-# Create your views here.
 def registration_view(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            account = form.save()
-            context = {'account': account}
+            user = form.save()
+            login(request, user)
+            context = {'account': user}
             return render(request, 'accounts/partials/profile.html', context)
     context = {'form': UserCreationForm()}
-    return render(request, 'account/partials/register.html', context)
+    return render(request, 'accounts/partials/register.html', context)
 
 def login_view(request):
     if request.method == "POST":
         form = AuthenticationForm(data = request.POST)
         if form.is_valid():
-            user = form.save()
+            user = form.get_user()
             login(request, user)
             context = {'account': user}
-            return render(request, 'account/partials/profile.html', context)
+            return render(request, 'accounts/partials/profile.html', context)
     context = {'form': AuthenticationForm()}
-    return render(request, 'account/partials/login.html', context)
+    return render(request, 'accounts/partials/login.html', context)
 
 def logout_view(request):
-    user = AuthenticationForm(request.POST)
-    logout(request, user)
-    return render(request, 'account/partials/login.html')
+    logout(request)
+    return render(request, 'accounts/partials/login.html', {'form': AuthenticationForm()})
 
 def delete_account_view(request):
-    account = get_object_or_404(user=request.user)
-    account.delete()
+    user = request.user
+    user.delete()
     return HttpResponse("")

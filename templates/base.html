@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LEARNING - {% block title %} {% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="font-bold flex flex-col items-center min-h-screen">
     <nav class="flex justify-evenly items-center w-full bg-amber-800">
         <a href="{% url 'home' %}">Home</a>
+        <a href="/accounts/" class="btn btn-primary">Dashboard</a>
+
+    <div id="profile">{% include 'accounts/partials/profile-avatar.html' %}</div>
     </nav>
-    <main >
+    <main id="base_main">
         {% block content %} {% endblock %}
     </main>
     <!-- GLOBAL MODAL -->
@@ -25,7 +29,7 @@
             <button class="absolute right-2 top-2 bg-secondary px-2 py-1 hover:cursor-pointer rounded-md" onclick="closeModal()">Close</button>
             
             <!-- DYNAMIC CONTENT -->
-            <div id="modal-body"></div>
+            <div id="modal-body">{% block modal %}{% endblock %}</div>
         </div>
 
     </div>
@@ -60,6 +64,10 @@
                 closeModal()
             }
         })
+    </script>
+
+    <script>
+        lucide.createIcons();
     </script>
 </body>
 </html>

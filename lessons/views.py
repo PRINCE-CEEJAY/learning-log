@@ -26,9 +26,8 @@ def lesson_list_create_view(request):
 @login_required
 def get_lessons(request):
     lessons = Lesson.objects.filter(user=request.user).order_by('-created_at') 
-
     if request.htmx:
-        query = request.GET.get('search')
+        query = request.GET.get('search', '')
         import time
         time.sleep(2)
         lessons = request.user.lesson.filter(Q(topic__icontains=query) | 
@@ -45,8 +44,7 @@ def lesson_update(request, id):
     if request.method == "POST":
         form = LessonForm(request.POST, instance=lesson)
         if form.is_valid():
-            updated = form.save(commit=False)
-            updated.save()
+            updated = form.save()
             context = {'lesson': updated}
             return render(request, 'lessons/partials/lesson-item.html', context)        
 

@@ -1,22 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="overflow-x-auto" id="lesson-base">
+
+{% include 'lessons/partials/loading.html' %}
+
+<div class="overflow-x-auto"  id="lesson-base">
+    {% include 'lessons/partials/search.html' %}
     
     <button 
     class="btn btn-primary"
-    hx-get="{% url 'lessons:create_lesson' %}"
+    hx-get="{% url 'create_lesson' %}"
     hx-swap="innerHTML"
     hx-target="#modal-body"
     hx-on:click="openModal()"
     > Add Lesson </button>
     
-  
-    {% include 'lessons/partials/search.html' %}
-      {% include 'lessons/partials/loading.html' %}
-    
     {% if lessons %}
-    <table class="table table-zebra table-pin-rows">
+    <table class="table table-zebra table-pin-rows" >
         <thead>
             <tr>
                 <th>ID</th>

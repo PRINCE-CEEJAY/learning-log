@@ -8,8 +8,8 @@ class Lesson(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='lesson')
 
-    class Meta:
-        unique_together = ('topic', 'user')
+    # class Meta:
+    #     unique_together = ('topic', 'user')
 
     def __str__(self):
         return self.topic

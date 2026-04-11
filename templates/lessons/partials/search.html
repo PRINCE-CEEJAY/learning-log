@@ -3,13 +3,13 @@
   type="search" 
   name="search"
   required placeholder="Search"
-  hx-get="{% url 'lessons:get_lessons' %}"
+  hx-get="{% url 'get_lessons' %}"
   hx-trigger="keyup delay:500ms"
   hx-swap="innerHTML" 
   hx-target="#lesson-list"
   hx-indicator="#loading"
-  hx-on::before-request="document.getElementById('lesson-list').style.opacity = '0.2'"
-  hx-on::after-request="document.getElementById('lesson-list').style.opacity='1'"
+  hx-on::before-request="document.getElementById('lesson-list').classList.add('opacity-50')"
+  hx-on::after-request="document.getElementById('lesson-list').classList.remove('opacity-50')"
   />
 
   <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

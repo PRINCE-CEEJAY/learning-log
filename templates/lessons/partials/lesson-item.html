@@ -1,20 +1,20 @@
-<tr id="lesson-row">
+<tr id="lesson-row-{{ lesson.id }}">
     <td>{{ lesson.id }}</td>
     <td>{{ lesson.topic }}</td>
     
     <td colspan="3" class="flex gap-2"> 
             <!-- DETAIL -->
             <form
-            hx-get="{% url 'lessons:lesson_detail' lesson.id %}" 
+            hx-get="{% url 'lesson_detail' lesson.id %}" 
             hx-swap="innerHTML"
-            hx-target="#lesson-base"
+            hx-target="#lesson-list"
             >     
                 <button type="submit" class="btn btn-primary">Get Detail</button>
             </form>
     
         <!-- UPDATING -->
             <form
-            hx-get="{% url 'lessons:lesson_update' lesson.id %}" 
+            hx-get="{% url 'lesson_update' lesson.id %}" 
             hx-swap="innerHTML"
             hx-target="#modal-body" 
             class="btn btn-primary"
@@ -26,11 +26,11 @@
         
             <!-- DELETION -->
             <form
-            hx-delete="{% url 'lessons:lesson_delete' lesson.id %}" 
+            hx-delete="{% url 'lesson_delete' lesson.id %}" 
             hx-swap="outerHTML"
             hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
             hx-confirm="Are you sure to delete: {{ lesson.topic }}"
-            hx-target="#lesson-row"
+            hx-target="#lesson-row-{{ lesson.id }}"
             >     
                 <button type="submit" class="btn btn-secondary">Delete</button>
             </form>

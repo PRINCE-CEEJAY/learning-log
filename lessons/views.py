@@ -18,7 +18,7 @@ def lesson_list_create_view(request):
             lesson.user = request.user
             lesson.save()
             context = {'lesson': lesson }
-            return(request, 'lessons/partials/lesson-detail.html', context) 
+            return render(request, 'lessons/partials/lesson-item.html', context) 
     return render(request, 'lessons/partials/add-lesson.html', {'form': LessonForm()})
         
 

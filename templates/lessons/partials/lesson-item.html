@@ -1,38 +1,38 @@
-<li id="lesson-{{ lesson.id }}" class="m-2">
-    <span>{{ lesson.id }} - {{lesson.topic}}</span>
-
-    <div class="flex justify-evenly">
-        <!-- UPDATING -->
-        <form
-        hx-get="{% url 'lesson_update' lesson.id %}" 
-        hx-swap="innerHTML"
-        hx-target="#modal-body" 
-        class="btn btn-primary"
-        hx-on:click="openModal()"    
-        >
-        {% csrf_token %}
-            <button type="submit" class="btn btn-primary">Edit</button>     
-        </form>  
+<tr id="lesson-row">
+    <td>{{ lesson.id }}</td>
+    <td>{{ lesson.topic }}</td>
     
-        <!-- DELETION -->
-        <form
-        hx-delete="{% url 'lesson_delete' lesson.id %}" 
-        hx-swap="outerHTML"
-        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
-        hx-confirm="Are you sure to delete: {{ lesson.topic }}"
-        hx-target="#lesson-{{ lesson.id }}"
-        >     
-            <button type="submit" class="btn btn-secondary">Delete</button>
-        </form>
-
-        <!-- DETAIL -->
-        <form
-        hx-get="{% url 'lesson_detail' lesson.id %}" 
-        hx-swap="outerHTML"
-        hx-target="#lesson-list"
-        >     
-            <button type="submit" class="btn btn-primary">Get Detail</button>
-        </form>
-    </div>
-</li>
-<hr/>
+    <td colspan="3" class="flex gap-2"> 
+            <!-- DETAIL -->
+            <form
+            hx-get="{% url 'lesson_detail' lesson.id %}" 
+            hx-swap="innerHTML"
+            hx-target="#lesson-base"
+            >     
+                <button type="submit" class="btn btn-primary">Get Detail</button>
+            </form>
+    
+        <!-- UPDATING -->
+            <form
+            hx-get="{% url 'lesson_update' lesson.id %}" 
+            hx-swap="innerHTML"
+            hx-target="#modal-body" 
+            class="btn btn-primary"
+            hx-on:click="openModal()"    
+            >
+            {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Edit</button>     
+            </form>  
+        
+            <!-- DELETION -->
+            <form
+            hx-delete="{% url 'lesson_delete' lesson.id %}" 
+            hx-swap="outerHTML"
+            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+            hx-confirm="Are you sure to delete: {{ lesson.topic }}"
+            hx-target="#lesson-row"
+            >     
+                <button type="submit" class="btn btn-secondary">Delete</button>
+            </form>
+    </td>
+</tr>

@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from .models import Lesson
 from .forms import LessonForm
+from django.db.models import Q
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
@@ -24,7 +25,16 @@ def lesson_list_create_view(request):
 
 @login_required
 def get_lessons(request):
-    lessons = Lesson.objects.filter(user=request.user).order_by('-created_at')    
+    lessons = Lesson.objects.filter(user=request.user).order_by('-created_at') 
+
+    if request.htmx:
+        query = request.GET.get('search')
+        import time
+        time.sleep(2)
+        lessons = request.user.lesson.filter(Q(topic__icontains=query) | 
+                            Q(summary__icontains=query))
+        return render(request, 'lessons/partials/lesson-list.html', {'lessons': lessons})   
+    
     context = {'lessons': lessons, 'form': LessonForm()}
     return render(request, 'lessons/lesson-list.html', context)
 

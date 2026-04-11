@@ -1,8 +1,12 @@
 <h1 class="text-success text-xl">{{ lesson.topic }}</h1>
 <div>
     <h1>Summary: {{ lesson.summary}}</h1>
-    <h1>Date Created: {{ lesson.date_created}}</h1>
+    <h1>Date Created: {{ lesson.created_at}}</h1>
     <h1>Author: {{ lesson.user}}</h1>
 
-    <buton class="btn" hx-get="{% url 'get_lessons' %}" hx-target="#lessons-list" hx-swap="outerHTML" >Back</buton>
+    <button class="btn" 
+    hx-get="{% url 'get_lessons' %}" 
+    hx-target="#lesson-list" 
+    hx-swap="outerHTML" 
+    >Back</button>
 </div>

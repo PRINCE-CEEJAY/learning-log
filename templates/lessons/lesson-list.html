@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div>
 
     <button 
     class="btn btn-primary"
@@ -9,7 +10,11 @@
     hx-target="#modal-body"
     hx-on:click="openModal()"
     > Add Lesson </button>
-
+    
+    {% include 'lessons/partials/loading.html' %}
+    {% include 'lessons/partials/search.html' %}
+    
+    
     {% if lessons %}
     <ul id="lesson-list">
         {% for lesson in lessons %}
@@ -20,6 +25,8 @@
     {% else %}
         <h1 class="text-danger">No lesson !</h1>
     {% endif %}
-
+    
+    </div>
 </div>
+
 {% endblock %}

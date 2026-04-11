@@ -1,5 +1,5 @@
 <form 
-hx-post="{% url 'create_lesson' %}" 
+hx-post="{% url 'lessons:create_lesson' %}" 
 hx-target="#lesson-row" 
 hx-swap="outerHTML"
 hx-on::after-request="closeModal()"

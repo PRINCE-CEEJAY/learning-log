@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request, 'home.html')
 
-@login_required(login_url='/admin/')
+@login_required(login_url='/accounts/')
 def lesson_list_create_view(request):    
     if request.method == "POST":
         form = LessonForm(request.POST)
@@ -23,7 +23,7 @@ def lesson_list_create_view(request):
         
 
 
-@login_required
+@login_required(login_url="/accounts/")
 def get_lessons(request):
     lessons = Lesson.objects.filter(user=request.user).order_by('-created_at') 
     if request.htmx:
@@ -38,7 +38,7 @@ def get_lessons(request):
     return render(request, 'lessons/lesson-list.html', context)
 
 
-@login_required(login_url='/admin/')
+@login_required(login_url='/accounts/')
 def lesson_update(request, id):
     lesson = get_object_or_404(Lesson, id=id, user=request.user)
     if request.method == "POST":
@@ -51,10 +51,12 @@ def lesson_update(request, id):
     context = {'form': LessonForm(instance=lesson), 'lesson': lesson}
     return render(request, 'lessons/partials/update-lesson.html', context)
 
+@login_required(login_url="/accounts/")
 def get_details(request, id):
     lesson = get_object_or_404(Lesson, id=id, user=request.user)
     return render(request, 'lessons/partials/lesson-detail.html', {'lesson': lesson})
 
+@login_required(login_url="/accounts/")
 def lesson_delete(request, id):
     lesson = get_object_or_404(Lesson, id=id, user=request.user)
     lesson.delete()

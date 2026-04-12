@@ -5,8 +5,8 @@
                 <button
                 class="btn btn-secondary"
                 hx-get="{% url 'logout' %}"
-                hx-swap="innerHTML"
-                hx-target="#account-main-section"
+                hx-swap="outerHTML"
+                hx-target="#login"
                 >
                 <i data-lucide="log-out"></i> 
                 Logout</button>            

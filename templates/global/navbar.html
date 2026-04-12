@@ -1,0 +1,5 @@
+<nav class="flex justify-evenly items-center w-full bg-amber-800">
+    <a href="{% url 'home' %}">Home</a>
+    <a href="/accounts/" class="btn btn-primary">Dashboard</a>
+    <div id="profile">{% include 'accounts/partials/profile-avatar.html' %}</div>
+</nav>

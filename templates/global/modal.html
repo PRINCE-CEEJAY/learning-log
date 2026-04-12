@@ -1,0 +1,16 @@
+<!-- GLOBAL MODAL -->
+<div id="modal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50"
+hx-on:click="if(event.target.id === 'modal') closeModal() "
+>
+    
+    <!-- MODAL CONTENT -->
+    <div id="modal-content" class="relative w-[500px] bg-white rounded-2xl shadow-xs p-6 transition-all scale-95 opacity-0 duration-300">
+
+        <!-- CLOSE BUTTON -->
+        <button class="absolute right-2 top-2 bg-secondary px-2 py-1 hover:cursor-pointer rounded-md" onclick="closeModal()">Close</button>
+        
+        <!-- DYNAMIC CONTENT -->
+        <div id="modal-body">{% block modal %}{% endblock %}</div>
+    </div>
+
+</div>
